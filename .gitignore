@@ -1,6 +1,9 @@
 # Mac specific
 .DS_Store
 
+# idea
+.idea
+
 # sources
 frontend/**/*.js
 frontend/**/*.map

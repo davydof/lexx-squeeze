@@ -1,8 +1,15 @@
-import { IProgressListener } from "./iProgressListener";
-import { ISqueezeDealsStatistic, ISqueezeParameters, SqueezeBindings, SqueezeCalculator } from "./squeezeCalculator";
-import { IKline } from "./types";
-import { invertKlines, sortedArrayIndex } from './utils';
-import { BaseOptVar, CategoricalOptVar, ConstantOptVar, IntegerOptVar, OptimizationAlgorithm, OptimizersMap } from './optimization';
+import {IProgressListener} from "./iProgressListener";
+import {
+    BaseOptVar,
+    CategoricalOptVar,
+    ConstantOptVar,
+    IntegerOptVar,
+    OptimizationAlgorithm,
+    OptimizersMap
+} from './optimization';
+import {ISqueezeDealsStatistic, ISqueezeParameters, SqueezeBindings, SqueezeCalculator} from "./squeezeCalculator";
+import {IKline} from "./types";
+import {invertKlines, sortedArrayIndex} from './utils';
 
 export interface ISqueezeOptimizationsParameters {
     isShort: boolean;
@@ -45,7 +52,7 @@ export class BestSqueezeFinder {
     constructor(private _symbolsTicker: number,
                 private _commissionPercent: number,
                 private _klines: IKline[],
-                private _klinesTimeFrame: string, 
+                private _klinesTimeFrame: string,
                 private _params: ISqueezeOptimizationsParameters,
                 private _progressBar?: IProgressListener,
                 private _numTopTries: number = 20) {
@@ -83,7 +90,7 @@ export class BestSqueezeFinder {
         if (insertIdxLeft != insertIdxRight) {
             // there are several elements with such profit, so try to combine them if it makes sense
             for (let i = insertIdxLeft; i < insertIdxRight; i++) {
-                if (this._topIterations[i].settings.percentEnter != stat.settings.percentEnter 
+                if (this._topIterations[i].settings.percentEnter != stat.settings.percentEnter
                     || this._topIterations[i].settings.percentExit != stat.settings.percentExit
                     || this._topIterations[i].settings.binding != stat.settings.binding
                     || this._topIterations[i].settings.stopOnKlineClosed != stat.settings.stopOnKlineClosed ) {
@@ -110,7 +117,7 @@ export class BestSqueezeFinder {
             this._topIterations.pop();
         }
     }
-    
+
     private _passesUserFilters(stat: ISqueezeDealsStatistic): boolean {
         if (!this._params.filters) {
             return true;

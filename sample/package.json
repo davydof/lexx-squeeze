@@ -4,10 +4,13 @@
   "description": "",
   "main": "cmd/cmdSample.ts",
   "dependencies": {
+    "axios": "^1.6.8",
     "squeeze-utils": "file:../squeeze-utils"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "run": "npx ts-node src/cmdSample.ts",
+    "build-and-run": "npm run build && npm run run"
   },
   "author": "",
   "license": "ISC",
