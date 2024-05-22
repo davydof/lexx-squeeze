@@ -95,7 +95,7 @@ async function findBestSqueeze(exchangeName: ExchangeName, symbol: string, from:
 
     progressBar.reset()
 
-    const finder = new BestSqueezeFinder(symbolsTickers[symbol], commissionPercent, klines, '1m', settings, progressBar);
+    const finder = new BestSqueezeFinder(symbolsTickers[symbol], commissionPercent, klines, '1m', settings, progressBar, 200);
     const bestStat = await finder.findBestSqueeze();
     const all = await finder.getAllAttemptsSqueezes();
     console.log('Finished calculation in %s seconds', progressBar.getSpentSeconds().toFixed(3))
@@ -154,7 +154,7 @@ calculateOne('binance', 'BTCUSDT', 1714514400000, 1715205600000, 0.075, {
 // 01.01.24
 // 1704070800000
 // findBestSqueeze('BBUSDT', 1712696400000, 1715905619999, 0.02, {
-findBestSqueeze('binance','SOLUSDT', 1712696400000, 1719876721000, 0.02, {
+findBestSqueeze('binance-futures','BBUSDT', 1712696400000, 1719876721000, 0.02, {
     percentEnter: {
         from: 1,
         to: 4
@@ -174,7 +174,7 @@ findBestSqueeze('binance','SOLUSDT', 1712696400000, 1719876721000, 0.02, {
     //     from: 1,
     //     to: 10
     // },
-    timeFrame: '1m',
+    timeFrame: '5m',
     oncePerCandle: true,
     stopOnKlineClosed: false,
     filters: {
@@ -184,7 +184,7 @@ findBestSqueeze('binance','SOLUSDT', 1712696400000, 1719876721000, 0.02, {
         maxSellBuyRatio: 0.5,
     },
     algorithm: OptimizationAlgorithm.GRID,
-    iterations: 1000,
+    iterations: 10000,
     isShort: false,
 });
 

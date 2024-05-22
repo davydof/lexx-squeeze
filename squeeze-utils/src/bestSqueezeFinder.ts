@@ -194,11 +194,19 @@ export class BestSqueezeFinder {
 
     async findBestSqueeze(): Promise<ISqueezeDealsStatistic> {
         this._currentIteration = 0;
-        this._topIterations = []
+        this._topIterations = [];
 
         const dims = BestSqueezeFinder._convertToDims(this._params);
         await this._optimizationJsMinimize(OptimizersMap[this._params.algorithm](dims, this._params.iterations));
         await this._progressBar?.onProgressUpdated(this._params.iterations, this._params.iterations);
+        console.log('this._topIterations', this._topIterations.length);
+        // console.log('this._topIterations', this._topIterations.map(({totalProfitPercent,totalCumulativePercent, totalDeals,coeff,winRate}) => ({
+        //     totalProfitPercent,
+        //     totalCumulativePercent,
+        //     totalDeals,
+        //     coeff,
+        //     winRate,
+        // })));
         return this._topIterations && this._topIterations[0];
     }
 
